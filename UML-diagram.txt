@@ -1,0 +1,44 @@
+@startuml
+
+participant Courier
+participant "МКР Заказы" as OrderService #lightblue
+queue "Очередь\nSMSSend" as SMSQueue 
+participant "МКР Уведомления" as NotificationService #lightblue
+participant "Внешний сервис SMS" as ExternalSMSService
+
+Courier -> OrderService: REST-запрос о смене статуса заказа
+
+
+OrderService -> SMSQueue: отправка сообщения\nв SMSQueue
+OrderService --> Courier: ответ 200 OK
+
+SMSQueue -> NotificationService: получение сообщения\nиз SMSQueue
+
+activate NotificationService
+
+NotificationService -> ExternalSMSService: REST-запрос на отправку SMS
+
+activate ExternalSMSService
+
+alt СМС успешно отправлено
+    ExternalSMSService --> NotificationService: подтверждение об отправке
+
+    
+else СМС не удалось отправить
+    ExternalSMSService --> NotificationService: ошибка "не удалось отправить СМС"
+
+deactivate ExternalSMSService
+
+end
+
+
+    NotificationService -> NotificationService: сохранение информации об уведомлении в БД
+    NotificationService -> NotificationService: сохранение статуса SMS в лог и БД
+
+deactivate NotificationService
+
+... ...
+
+
+
+@enduml
