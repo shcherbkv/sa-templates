@@ -1,39 +1,39 @@
-@startuml
+Ôªø@startuml
 
 participant Courier
-participant "Ã – «‡Í‡Á˚" as OrderService #lightblue
-queue "Œ˜ÂÂ‰¸\nSMSSend" as SMSQueue 
-participant "Ã – ”‚Â‰ÓÏÎÂÌËˇ" as NotificationService #lightblue
-participant "¬ÌÂ¯ÌËÈ ÒÂ‚ËÒ SMS" as ExternalSMSService
+participant "–ú–ö–† –ó–∞–∫–∞–∑—ã" as OrderService #lightblue
+queue "–û—á–µ—Ä–µ–¥—å\nSMSSend" as SMSQueue 
+participant "–ú–ö–† –£–≤–µ–¥–æ–º–ª–µ–Ω–∏—è" as NotificationService #lightblue
+participant "–í–Ω–µ—à–Ω–∏–π —Å–µ—Ä–≤–∏—Å SMS" as ExternalSMSService
 
-Courier -> OrderService: REST-Á‡ÔÓÒ Ó ÒÏÂÌÂ ÒÚ‡ÚÛÒ‡ Á‡Í‡Á‡
+Courier -> OrderService: REST-–∑–∞–ø—Ä–æ—Å –æ —Å–º–µ–Ω–µ —Å—Ç–∞—Ç—É—Å–∞ –∑–∞–∫–∞–∑–∞
 
 
-OrderService -> SMSQueue: ÓÚÔ‡‚Í‡ ÒÓÓ·˘ÂÌËˇ\n‚ SMSQueue
-OrderService --> Courier: ÓÚ‚ÂÚ 200 OK
+OrderService -> SMSQueue: –æ—Ç–ø—Ä–∞–≤–∫–∞ —Å–æ–æ–±—â–µ–Ω–∏—è\n–≤ SMSQueue
+OrderService --> Courier: –æ—Ç–≤–µ—Ç 200 OK
 
-SMSQueue -> NotificationService: ÔÓÎÛ˜ÂÌËÂ ÒÓÓ·˘ÂÌËˇ\nËÁ SMSQueue
+SMSQueue -> NotificationService: –ø–æ–ª—É—á–µ–Ω–∏–µ —Å–æ–æ–±—â–µ–Ω–∏—è\n–∏–∑ SMSQueue
 
 activate NotificationService
 
-NotificationService -> ExternalSMSService: REST-Á‡ÔÓÒ Ì‡ ÓÚÔ‡‚ÍÛ SMS
+NotificationService -> ExternalSMSService: REST-–∑–∞–ø—Ä–æ—Å –Ω–∞ –æ—Ç–ø—Ä–∞–≤–∫—É SMS
 
 activate ExternalSMSService
 
-alt —Ã— ÛÒÔÂ¯ÌÓ ÓÚÔ‡‚ÎÂÌÓ
-    ExternalSMSService --> NotificationService: ÔÓ‰Ú‚ÂÊ‰ÂÌËÂ Ó· ÓÚÔ‡‚ÍÂ
+alt –°–ú–° —É—Å–ø–µ—à–Ω–æ –æ—Ç–ø—Ä–∞–≤–ª–µ–Ω–æ
+    ExternalSMSService --> NotificationService: –ø–æ–¥—Ç–≤–µ—Ä–∂–¥–µ–Ω–∏–µ –æ–± –æ—Ç–ø—Ä–∞–≤–∫–µ
 
     
-else —Ã— ÌÂ Û‰‡ÎÓÒ¸ ÓÚÔ‡‚ËÚ¸
-    ExternalSMSService --> NotificationService: Ó¯Ë·Í‡ "ÌÂ Û‰‡ÎÓÒ¸ ÓÚÔ‡‚ËÚ¸ —Ã—"
+else –°–ú–° –Ω–µ —É–¥–∞–ª–æ—Å—å –æ—Ç–ø—Ä–∞–≤–∏—Ç—å
+    ExternalSMSService --> NotificationService: –æ—à–∏–±–∫–∞ "–Ω–µ —É–¥–∞–ª–æ—Å—å –æ—Ç–ø—Ä–∞–≤–∏—Ç—å –°–ú–°"
 
 deactivate ExternalSMSService
 
 end
 
 
-    NotificationService -> NotificationService: ÒÓı‡ÌÂÌËÂ ËÌÙÓÏ‡ˆËË Ó· Û‚Â‰ÓÏÎÂÌËË ‚ ¡ƒ
-    NotificationService -> NotificationService: ÒÓı‡ÌÂÌËÂ ÒÚ‡ÚÛÒ‡ SMS ‚ ÎÓ„ Ë ¡ƒ
+    NotificationService -> NotificationService: —Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ –∏–Ω—Ñ–æ—Ä–º–∞—Ü–∏–∏ –æ–± —É–≤–µ–¥–æ–º–ª–µ–Ω–∏–∏ –≤ –ë–î
+    NotificationService -> NotificationService: —Å–æ—Ö—Ä–∞–Ω–µ–Ω–∏–µ —Å—Ç–∞—Ç—É—Å–∞ SMS –≤ –ª–æ–≥ –∏ –ë–î
 
 deactivate NotificationService
 
